@@ -18,7 +18,22 @@ app.get("/musicians/:id", async (request, response) => {
     response.json(musician);
 }
 )
+app.post("/musicians", async (request, response) => {
+    const restaurant = await Musician.create(request.body);
+    response.json(restaurant);
+});
 
+app.put("/musicians/:id", async (request, response) => {
+    const updatedRest = await Musician.update(request.body, {where: {id: request.params.id}
+    });
+    response.json(updatedRest);
+})
+
+app.delete("/musicians/:id", async (request, response) => {
+    const deletedRest = await Musician.destroy({where: {id: request.params.id}
+    });
+    response.json(deletedRest);
+})
 
 
 module.exports = app;
